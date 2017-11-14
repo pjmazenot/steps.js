@@ -1,0 +1,12 @@
+##################################
+#        System and tools        #
+##################################
+
+README.mdown
+.DS_Store
+*.log
+.idea/
+nbproject/
+**/node_modules/
+**/bower_components/
+vendor/
