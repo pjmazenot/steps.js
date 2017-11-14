@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        <style>
+            #test1 {
+                width: 150px;
+                height: 150px;
+                background: blue;
+                margin: 20px;
+            }
+
+            #test2 {
+                width: 250px;
+                height: 50px;
+                background: green;
+                margin-left: 120px;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <div id="test1"></div>
+        <div id="test2"></div>
+
+        <script type="text/javascript" src="../build/jsattendant-1.0.0.js"></script>
+        <script>
+
+            var steps = [
+                {
+                    elementId: 'test1',
+                    title: 'Test 1',
+                    description: 'aisuh ioaus hioaus iuash io ssss',
+                    triggerNext: 'click'
+                },
+                {
+                    elementId: 'test2',
+                    title: 'Test 2',
+                    description: 'aisuh ioaus hioaus iuash io ssss2'
+                }
+            ];
+
+            var test = new Assistant(steps);
+
+        </script>
+    </body>
+</html>
