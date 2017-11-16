@@ -1,4 +1,4 @@
-class Assistant {
+class StepsJS {
 
     constructor(steps, options = {}) {
 
