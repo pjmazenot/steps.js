@@ -1,0 +1,417 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <style>
+            html, body {
+                padding: 0;
+                margin: 0;
+                font-family: 'Open Sans', sans-serif;
+                background: #fbf7fd;
+            }
+            h1, h2, h3 {
+                color: #310044;
+                font-weight: normal;
+            }
+            h1 .subtitle {
+                color: #967f9e;
+                font-size: .6em;
+            }
+            h2 {
+                margin-top: 30px;
+            }
+            pre {
+                margin: 0;
+            }
+            input, select, button {
+                font-family: 'Open Sans', sans-serif;
+            }
+            code {
+                border-radius: 5px;
+            }
+            #header {
+                width: 100%;
+                height: 40px;
+                padding-left: 30px;
+                background: #310044;
+                color: #fff;
+                line-height: 40px;
+            }
+            #content {
+                max-width: 1040px;
+                margin: 0 auto;
+                padding: 0 5%;
+            }
+            .run-button {
+                background: #310044;
+                border: 0;
+                font-size: 15px;
+                line-height: 35px;
+                padding: 2px 20px;
+                color: #fff;
+                cursor: pointer;
+            }
+            #demo-form input, #demo-form select, #demo-form button {
+                height: 43px;
+                background-color: #fff;
+                border: 1px solid #967f9e;
+                padding: 0 15px;
+                line-height: 44px;
+                border-radius: 4px;
+                font-size: 16px;
+            }
+            #demo-form button {
+                line-height: 41px !important;
+                cursor: pointer;
+                background: #967f9e;
+                color: #fff;
+            }
+            #demo-form button:hover {
+                background: #331245;
+            }
+
+            .pulse {
+                box-shadow: 0 0 0 rgba(204,169,44, 0.4);
+                animation: pulse 2s infinite;
+            }
+            .pulse:hover {
+                animation: none;
+            }
+
+            @-webkit-keyframes pulse {
+                0% {
+                    -webkit-box-shadow: 0 0 0 0 rgba(49,0,68, 0.4);
+                }
+                70% {
+                    -webkit-box-shadow: 0 0 0 10px rgba(49,0,68, 0);
+                }
+                100% {
+                    -webkit-box-shadow: 0 0 0 0 rgba(49,0,68, 0);
+                }
+            }
+            @keyframes pulse {
+                0% {
+                    -moz-box-shadow: 0 0 0 0 rgba(49,0,68, 0.4);
+                    box-shadow: 0 0 0 0 rgba(49,0,68, 0.4);
+                }
+                70% {
+                    -moz-box-shadow: 0 0 0 10px rgba(49,0,68, 0);
+                    box-shadow: 0 0 0 10px rgba(49,0,68, 0);
+                }
+                100% {
+                    -moz-box-shadow: 0 0 0 0 rgba(49,0,68, 0);
+                    box-shadow: 0 0 0 0 rgba(49,0,68, 0);
+                }
+            }
+        </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/idea.min.css">
+
+        <script type="text/javascript" src="build/stepsjs-1.0.0.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+    </head>
+    <body>
+
+        <header id="header">
+            steps.js - version 1.0.0 (latest)
+        </header>
+
+        <div id="content">
+
+            <h1>
+                steps.js<br/>
+                <span class="subtitle">A vanilla Javascript library for creating guided user flows</span>
+            </h1>
+
+            <p>
+                Vanilla Javascript, No jQuery, Light, Easy to use, Guide the user on your website, form, etc.
+            </p>
+
+            <h2 id="demo">
+                Demo
+            </h2>
+
+            <p>
+                This demo simulate a user flow where you want to guide the user from the product selection to the "Add to cart" action.
+            </p>
+
+            <p>
+                <button type="button" class="run-button pulse" onclick="run_demo();">&#9658; Try steps.js</button>
+            </p>
+
+            <form id="demo-form" onsubmit="javascript:alert('Bravo!');this.reset();return false;">
+                <select id="step1">
+                    <option value="0">Select a product</option>
+                    <option value="1">Product 1</option>
+                    <option value="2">Product 2</option>
+                    <option value="3">Product 3</option>
+                </select>
+
+                <input type="text" id="step2" placeholder="Quantity"/>
+
+                <button type="submit" id="step3">Add to cart</button>
+                <input type="reset" style="display: none;">
+            </form>
+
+            <br/>
+
+            <h2>Getting Started</h2>
+
+            <p>
+                To include the steps.js library add the following line to the <head> tag of your page :
+            </p>
+
+            <pre>
+                <code class="xml">
+&lt;script type="application/javascript" src="build/stepsjs-1.0.0.min.js"&gt;&lt;/script&gt;
+                </code>
+            </pre>
+
+            <h2>Usage</h2>
+
+            <h3>1. Define steps</h3>
+
+            <p>
+                The first part of the implementation is to define the user flow. In order to do that we define a variable
+                containing an array filled with the differents steps of the flow. Each step is an object containing the
+                following attributes :
+            </p>
+
+            <ul>
+                <li><strong>elementId</strong>: ID of the element</li>
+                <li><strong>title</strong>: Title for the hint</li>
+                <li><strong>description</strong>: Description for the hint</li>
+                <li><strong>triggerNext</strong>: Event on the element that is going to trigger the next step (supported events: <em>click</em>, <em>change</em>)</li>
+            </ul>
+
+            <p>
+                Example:
+            </p>
+
+            <pre>
+                <code class="javascript">
+var steps = [
+    {
+        elementId: 'step1',
+        title: 'Step 1',
+        description: 'You need to click on that div to go to the next step',
+        triggerNext: 'click'
+    },
+    {
+        elementId: 'step2',
+        title: 'Step 2',
+        description: 'You need to change this value to go to the next step',
+        triggerNext: 'change'
+    },
+    {
+        elementId: 'test3',
+        title: 'Step 3',
+        description: 'You need to click on that button to finish the flow',
+        triggerNext: 'click'
+    }
+];
+                </code>
+            </pre>
+
+            <h3>2. Run StepsJs</h3>
+
+            <p>
+                There is different way to run StepsJs.
+            </p>
+
+            <h4>Default</h4>
+
+            <p>
+                The default run will automatically start the user flow using all default options of StepsJs.
+            </p>
+
+            <pre>
+                <code class="javascript">
+// Run defaults
+new StepsJs(steps);
+                </code>
+            </pre>
+
+            <h4>Customize options</h4>
+
+            <p>
+                If you'd like to personalized your instance of StepsJs you can pass an object containing override properties for the
+                <a href="#options">available options</a>. This will also automatically start the user flow.
+            </p>
+
+            <pre>
+                <code class="javascript">
+// Run with customized options
+new StepsJs(steps, options);
+                </code>
+            </pre>
+
+            <h4>Control the flow</h4>
+
+            <p>
+                You can also decide to have more control on the user flow by storing your StepsJs instance in a variable. It will allow
+                you to use the class methods to go to the previous or next step. This will also automatically start the user flow.
+            </p>
+
+            <pre>
+                <code class="javascript">
+// Run and store in a variable to control the process
+var demo = new StepsJs(steps, options);
+
+// Skip first step
+demo.processStep('next');
+                </code>
+            </pre>
+
+            <h2 id="options">Options</h2>
+
+            <p>
+                steps.js allows you to customize various parameters of the StepsSj instance. They are all passed as properties of the
+                <em>options</em> variable.
+            </p>
+
+            <p>
+                Here is a full example of a customize set of options:
+            </p>
+
+            <pre>
+                        <code class="javascript">
+var options = {
+    duration: 200,
+    interval: 5,
+    styles: {
+        frame: {
+            borderWidth: 3,
+            borderColor: '#ff0000'
+        },
+        hint: {
+            borderWidth: 1,
+            borderColor: '#00ff00',
+            borderRadius: 5,
+            backgroundColor: '#dbffdb'
+        }
+    }
+};
+                        </code>
+                    </pre>
+
+            <p>
+                Here is the description of all the available options:
+            </p>
+
+            <ul>
+                <li><strong>duration</strong>: Animation duration for the transition between steps</li>
+                <li><strong>interval</strong>: Frequency of the calculation of the move for the transition</li>
+                <li>
+                    <strong>styles</strong>
+                    <ul>
+                        <li>
+                            <strong>frame</strong>
+                            <ul>
+                                <li><strong>borderWidth</strong>: Frame border width</li>
+                                <li><strong>borderColor</strong>: Frame border color</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>hint</strong>
+                            <ul>
+                                <li><strong>borderWidth</strong>: Hint border width</li>
+                                <li><strong>borderColor</strong>: Hint border color</li>
+                                <li><strong>borderRadius</strong>: Hint border radius</li>
+                                <li><strong>backgroundColor</strong>: Hint background color</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <h2>Changelog</h2>
+
+            <pre>
+                <code class="nohighlight">
+Version 1.0.0
+* Frame animation between steps
+* Hint display
+* Styling options
+* Support for click and change event step trigger
+                </code>
+            </pre>
+
+            <h2>TODO</h2>
+
+            <pre>
+                <code class="nohighlight">
+* Add support for other events
+* Add custom class in options
+* Add language support
+* Skip step or custom next step
+* Support full html steps definition
+* Add analytics support
+* Support for names steps
+* Handle window resize
+                </code>
+            </pre>
+
+            <h2>Questions/suggestions/I use this project</h2>
+
+            <p>
+                You can can contact me at pj.mazenot@gmail.com for any question, suggestion, inquiry.<br/>
+                Support is available in english or french.
+            </p>
+
+            <p>
+                Also if you are using my project in a production website I'd very much like to hear about it 🙂
+            </p>
+
+        </div>
+
+        <footer>
+
+        </footer>
+
+        <script>
+
+            var steps = [
+                {
+                    elementId: 'step1',
+                    title: 'Step 1: Select a product',
+                    description: 'Select a product to go to the next step',
+                    triggerNext: 'change'
+                },
+                {
+                    elementId: 'step2',
+                    title: 'Step 2: Enter the quantity',
+                    description: 'Enter a quantity to go to the next step',
+                    triggerNext: 'change'
+                },
+                {
+                    elementId: 'step3',
+                    title: 'Step 3: Add the product to the cart',
+                    description: 'Click on the "Add to cart" button to finish the demo',
+                    triggerNext: 'click'
+                }
+            ];
+
+            var options = {
+                duration: 200,
+                interval: 5,
+                styles: {
+                    frame: {
+                        borderWidth: 3,
+                        borderColor: '#ff0000'
+                    },
+                    hint: {
+                        borderWidth: 1,
+                        borderColor: '#00ff00',
+                        borderRadius: 5,
+                        backgroundColor: '#dbffdb'
+                    }
+                }
+            };
+
+            function run_demo() {
+                var test = new StepsJs(steps);
+            }
+
+        </script>
+    </body>
+</html>

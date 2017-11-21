@@ -1,4 +1,4 @@
-class StepsJS {
+class StepsJs {
 
     constructor(steps, options = {}) {
 
