@@ -21,7 +21,7 @@ To see a working example of how steps.js can help you guide your visitors click 
 
 A complete documentation is also available here: 
 
-[Documentation](https://stepsjs.com/#getting started "")
+[Documentation](https://stepsjs.com/#getting-started "")
 
 ## Changelog
 
