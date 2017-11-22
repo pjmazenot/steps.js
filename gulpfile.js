@@ -9,7 +9,7 @@ let uglify = require('gulp-uglify-es').default;
 let gutil = require('gulp-util');
 
 // Directory letiables
-let jsVersion = '1.0.0';
+let jsVersion = '1.0.0-beta';
 
 /* ######################### SCRIPTS ######################### */
 
