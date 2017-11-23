@@ -6,6 +6,7 @@
     <meta name="author" content="Pierre-Julien Mazenot" />
     <meta name="keywords" content="javascript, js, step, steps, guide, user, vanilla, no jquery, open source" />
     <meta name="description" content="An open source vanilla Javascript library for creating guided user flows." />
+    <meta name="viewport" content="width=device-width" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
@@ -22,9 +23,9 @@
         a:hover:before, a.active:before {visibility: visible;-webkit-transform: scaleX(1);transform: scaleX(1);}
         pre {margin: 0;}
         input, select, button {font-family: 'Open Sans', sans-serif;}
-        code {display: block;padding: 5px;border-radius: 5px;background-color: #fff !important;}
+        code {display: block;padding: 5px;border-radius: 5px;background-color: #fff !important;overflow-x: scroll;}
         .clear {clear: both;}
-        #header {width: 100%;height: 40px;padding-left: 30px;background: #310044;color: #fff;line-height: 40px;}
+        #header {box-sizing: border-box;width: 100%;height: 40px;padding-left: 30px;background: #310044;color: #fff;line-height: 40px;}
         #header-left {float: left;}
         #header-left .title {font-size: 20px;}
         #header-left .version {font-size: 11px;}
@@ -33,7 +34,7 @@
         #header-right ul li {display: inline-block;margin: 0 10px;}
         #header-right ul li a {padding: 2px 0;transition: .5s all ease-in-out;}
         #header-right ul li a:hover, #header-right ul li a.active {color: #fff;}
-        #content {max-width: 1040px;margin: 0 auto;padding: 0 5%;}
+        #content {box-sizing: border-box;max-width: 1040px;margin: 0 auto;padding: 0 5%;}
         .run-button {background: #310044;border: 0;font-size: 15px;line-height: 35px;padding: 2px 20px;color: #fff;cursor: pointer;}
         #demo-form input, #demo-form select, #demo-form button {height: 43px;background-color: #fff;border: 1px solid #967f9e;padding: 0 15px;line-height: 44px;border-radius: 4px;font-size: 16px;}
         #demo-form button {line-height: 41px !important;cursor: pointer;background: #967f9e;color: #fff;}
@@ -51,6 +52,20 @@
             70% {-moz-box-shadow: 0 0 0 10px rgba(49,0,68, 0);box-shadow: 0 0 0 10px rgba(49,0,68, 0);}
             100% {-moz-box-shadow: 0 0 0 0 rgba(49,0,68, 0);box-shadow: 0 0 0 0 rgba(49,0,68, 0);}
         }
+
+        @media all and (min-width: 1000px) {
+            .hide-desktop {display: none !important;}
+        }
+
+        @media all and (max-width: 1000px) {
+            h1 {font-size: 30px; line-height: 24px;}
+            h1 .subtitle {font-size: 17px;}
+            .hide-mobile {display: none !important;}
+            #header {height: auto;padding-left: 0;text-align: center;}
+            #see-on-github {padding: 10px 10px 6px;border: 1px solid #967f9e;border-radius: 5px;}
+            #header-left {float: none;}
+            #header-right {float: none;}
+        }
     </style>
 
 </head>
@@ -59,8 +74,8 @@
 <header id="header">
     <div id="header-left">
         <span class="title">steps.js</span>
-        <span class="version">version 1.0.0-beta (latest)</span>
-        <a href="https://github.com/pjmazenot/steps.js/">
+        <span class="version">version 1.0.0-beta2 (latest)</span><br class="hide-desktop"/>
+        <a href="https://github.com/pjmazenot/steps.js/" id="see-on-github">
             See on Github
             <svg aria-hidden="true" style="fill: #967f9e;" height="20" version="1.1" viewBox="0 0 16 16" width="32"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
         </a>
@@ -76,6 +91,7 @@
             </ul>
         </nav>
     </div>
+    <div class="clear"></div>
 </header>
 
 <div id="content">
@@ -130,7 +146,7 @@
 
     <pre>
                 <code class="xml">
-&lt;script type="application/javascript" src="build/stepsjs-1.0.0-beta.min.js"&gt;&lt;/script&gt;
+&lt;script type="application/javascript" src="build/stepsjs-1.0.0-beta2.min.js"&gt;&lt;/script&gt;
                 </code>
             </pre>
 
@@ -180,16 +196,16 @@ var steps = [
                 </code>
             </pre>
 
-    <h3>2. Run StepsJs</h3>
+    <h3>2. Run steps.js</h3>
 
     <p>
-        There is different way to run StepsJs.
+        There is different way to run steps.js.
     </p>
 
     <h4>Default</h4>
 
     <p>
-        The default run will automatically start the user flow using all default options of StepsJs.
+        The default run will automatically start the user flow using all default options of steps.js.
     </p>
 
     <pre>
@@ -202,7 +218,7 @@ new StepsJs(steps);
     <h4>Customize options</h4>
 
     <p>
-        If you'd like to personalized your instance of StepsJs you can pass an object containing override properties for the
+        If you'd like to personalized your instance of steps.js you can pass an object containing override properties for the
         <a href="#options">available options</a>. This will also automatically start the user flow.
     </p>
 
@@ -216,7 +232,7 @@ new StepsJs(steps, options);
     <h4>Control the flow</h4>
 
     <p>
-        You can also decide to have more control on the user flow by storing your StepsJs instance in a variable. It will allow
+        You can also decide to have more control on the user flow by storing your steps.js instance in a variable. It will allow
         you to use the class methods to go to the previous or next step. This will also automatically start the user flow.
     </p>
 
@@ -230,7 +246,7 @@ demo.processStep('next');
                 </code>
             </pre>
 
-    <h3 id="options">3. Customize Options</h2>
+    <h3 id="options">3. Customize Options</h3>
 
         <p>
             steps.js allows you to customize various parameters of the StepsSj instance. They are all passed as properties of the
@@ -245,7 +261,6 @@ demo.processStep('next');
                 <code class="javascript">
 var options = {
     duration: 200,
-    interval: 5,
     styles: {
         frame: {
             borderWidth: 3,
@@ -267,25 +282,24 @@ var options = {
         </p>
 
         <ul>
-            <li><strong>duration</strong>: Animation duration for the transition between steps</li>
-            <li><strong>interval</strong>: Frequency of the calculation of the move for the transition</li>
+            <li><strong>duration</strong>: Animation duration for the transition between steps in ms (e.g: 1000)</li>
             <li>
                 <strong>styles</strong>
                 <ul>
                     <li>
                         <strong>frame</strong>
                         <ul>
-                            <li><strong>borderWidth</strong>: Frame border width</li>
-                            <li><strong>borderColor</strong>: Frame border color</li>
+                            <li><strong>borderWidth</strong>: Frame border width in pixels (e.g: 2)</li>
+                            <li><strong>borderColor</strong>: Frame border color hex code (e.g: #f6e78e)</li>
                         </ul>
                     </li>
                     <li>
                         <strong>hint</strong>
                         <ul>
-                            <li><strong>borderWidth</strong>: Hint border width</li>
-                            <li><strong>borderColor</strong>: Hint border color</li>
-                            <li><strong>borderRadius</strong>: Hint border radius</li>
-                            <li><strong>backgroundColor</strong>: Hint background color</li>
+                            <li><strong>borderWidth</strong>: Hint border width in pixels (e.g: 2)</li>
+                            <li><strong>borderColor</strong>: Hint border color hex code (e.g: #f6e78e)</li>
+                            <li><strong>borderRadius</strong>: Hint border radius in pixels (e.g: 2)</li>
+                            <li><strong>backgroundColor</strong>: Hint background color hex code (e.g: #f6e78e)</li>
                         </ul>
                     </li>
                 </ul>
@@ -296,7 +310,17 @@ var options = {
 
         <pre>
                 <code class="nohighlight">
-Version 1.0.0-beta
+2017-11-22
+-- Version 1.0.0-beta2 --
+* Add window resize handling
+* Add window scroll handling
+* Add mobile support for documentation
+* Fix a bug caused by multiple listeners on the same elements when running a flow more than once
+* Fix duration option behavior
+* Remove interval option
+
+2017-11-20
+-- Version 1.0.0-beta --
 * Create steps.js core
 * Add support for click and change event step triggers
 * Add frame animation between steps
@@ -311,8 +335,7 @@ Version 1.0.0-beta
 
         <pre>
                 <code class="nohighlight">
-* Handle window resize
-* Fix change event on inputs
+* Fix change event on inputs and select (mobile)
 * Add support for other events
 
 ---- PRODUCTION READY ----
@@ -322,6 +345,7 @@ Version 1.0.0-beta
 * Add support full html steps definition
 * Add analytics support
 * Add support for other languages
+* Improve animation fluidity on window resize
                 </code>
             </pre>
 
@@ -342,7 +366,7 @@ Version 1.0.0-beta
 
 </footer>
 
-<script type="text/javascript" src="build/stepsjs-1.0.0-beta.js"></script>
+<script type="text/javascript" src="build/stepsjs-1.0.0-beta2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
