@@ -8,15 +8,15 @@ let stripDebug = require('gulp-strip-debug');
 let uglify = require('gulp-uglify-es').default;
 let gutil = require('gulp-util');
 
-// Directory letiables
-let jsVersion = '1.0.0-beta';
+// steps.js version
+let stepsjsVersion = '1.0.0-beta2';
 
 /* ######################### SCRIPTS ######################### */
 
 // Creating a JavaScript build consisted of all the files specified in gulp.src
 gulp.task('build:scripts', function () {
     return gulp.src(['src/**/*.js'])
-        .pipe(concat('stepsjs-' + jsVersion + '.js'))
+        .pipe(concat('stepsjs-' + stepsjsVersion + '.js'))
         .pipe(gulp.dest('build'))
         .pipe(stripDebug())
         .pipe(uglify())
