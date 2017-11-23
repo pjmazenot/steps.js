@@ -21,13 +21,23 @@ To see a working example of how steps.js can help you guide your visitors click 
 
 A complete documentation is also available here: 
 
-[Documentation](https://stepsjs.com/#getting started "")
+[Documentation](https://stepsjs.com/#getting-started "")
 
 ## Changelog
 
 ```
 
-Version 1.0.0-beta
+2017-11-22
+-- Version 1.0.0-beta2 --
+* Add window resize handling
+* Add window scroll handling
+* Add mobile support for documentation
+* Fix a bug caused by multiple listeners on the same elements when running a flow more than once
+* Fix duration option behavior
+* Remove interval option
+
+2017-11-20
+-- Version 1.0.0-beta --
 * Create steps.js core
 * Add support for click and change event step triggers
 * Add frame animation between steps
@@ -42,8 +52,7 @@ Version 1.0.0-beta
 
 ```
 
-* Handle window resize
-* Fix change event on inputs
+* Fix change event on inputs and select (mobile)
 * Add support for other events
 
 ---- PRODUCTION READY ----
@@ -53,6 +62,7 @@ Version 1.0.0-beta
 * Add support full html steps definition
 * Add analytics support
 * Add support for other languages
+* Improve animation fluidity on window resize
 
 ```
 
