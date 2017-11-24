@@ -105,8 +105,7 @@
         Vanilla Javascript, No jQuery, Light, Easy to use, Guide the user on your website, form, etc.<br/>
         Tested on
     <ul>
-        <li>Google Chrome (Version 60.0.3112.90 (Official Build) (32 bits))</li>
-        <li>Google Chrome (Version 61.0.3163.100 (Official Build) (64-bit))</li>
+        <li>Google Chrome (Version 60.0.3112.90 (Build officiel) (32 bits))</li>
         <li>Mozilla Firefox(46.0.1)</li>
     </ul>
     </p>
@@ -142,29 +141,18 @@
     <h2 id="getting-started">Getting Started</h2>
 
     <p>
-        First, you need to download the
-        <a href="https://raw.githubusercontent.com/pjmazenot/steps.js/v1.0.0-rc1/build/stepsjs-1.0.0-rc1.js" target="_blank">latest version of steps.js</a>
-        (<a href="https://raw.githubusercontent.com/pjmazenot/steps.js/v1.0.0-rc1/build/stepsjs-1.0.0-rc1.min.js" target="_blank">minified</a>)
-        and place it in your Javascript assets/libs folder (e.g: /assets/js/stepsjs-1.0.0-rc1.min.js).
-    </p>
-    <p>
-        Then include the steps.js library in your page add the following line to the <head> tag:
+        To include the steps.js library add the following line to the <head> tag of your page :
     </p>
 
     <pre>
-        <code class="xml">
-&lt;script type="application/javascript" src="/assets/js/stepsjs-1.0.0-rc1.min.js"&gt;&lt;/script&gt;
-        </code>
-    </pre>
-
-    <p>
-        Be sure to replace the file name by the correct one if you are using a non-minified or
-        <a href="https://github.com/pjmazenot/steps.js/tree/v1.0.0-rc1/build" target="_blank">an older version of steps.js</a>.
-    </p>
+                <code class="xml">
+&lt;script type="application/javascript" src="build/stepsjs-1.0.0-beta2.min.js"&gt;&lt;/script&gt;
+                </code>
+            </pre>
 
     <h2 id="usage">Usage</h2>
 
-    <h3>1. Define the steps</h3>
+    <h3>1. Define steps</h3>
 
     <p>
         The first part of the implementation is to define the user flow. In order to do that we define a variable
@@ -196,13 +184,13 @@ var steps = [
         elementId: 'step2',
         title: 'Step 2',
         description: 'You need to change this value to go to the next step',
-        triggerNext: 'change'
+        triggerNext: ['change', 'keydown']
     },
     {
         elementId: 'test3',
         title: 'Step 3',
         description: 'You need to click on that button to finish the flow',
-        triggerNext: 'click'
+        triggerNext: ['click', 'touchstart']
     }
 ];
                 </code>
@@ -260,25 +248,27 @@ demo.processStep('next');
 
     <h3 id="options">3. Customize Options</h3>
 
-        <p>
-            steps.js allows you to customize various parameters of the StepsSj instance. They are all passed as properties of the
-            <em>options</em> variable.
-        </p>
+    <p>
+        steps.js allows you to customize various parameters of the StepsSj instance. They are all passed as properties of the
+        <em>options</em> variable.
+    </p>
 
-        <p>
-            Here is a full example of a customize set of options:
-        </p>
+    <p>
+        Here is a full example of a customize set of options:
+    </p>
 
-        <pre>
+    <pre>
                 <code class="javascript">
 var options = {
     duration: 200,
     styles: {
         frame: {
+        	customClass: 'custom-frame',
             borderWidth: 3,
             borderColor: '#ff0000'
         },
         hint: {
+        	customClass: 'custom-hint',
             borderWidth: 1,
             borderColor: '#00ff00',
             borderRadius: 5,
@@ -289,39 +279,48 @@ var options = {
                 </code>
             </pre>
 
-        <p>
-            Here is the description of all the available options:
-        </p>
+    <p>
+        Here is the description of all the available options:
+    </p>
 
-        <ul>
-            <li><strong>duration</strong>: Animation duration for the transition between steps in ms (e.g: 1000)</li>
-            <li>
-                <strong>styles</strong>
-                <ul>
-                    <li>
-                        <strong>frame</strong>
-                        <ul>
-                            <li><strong>borderWidth</strong>: Frame border width in pixels (e.g: 2)</li>
-                            <li><strong>borderColor</strong>: Frame border color hex code (e.g: #f6e78e)</li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>hint</strong>
-                        <ul>
-                            <li><strong>borderWidth</strong>: Hint border width in pixels (e.g: 2)</li>
-                            <li><strong>borderColor</strong>: Hint border color hex code (e.g: #f6e78e)</li>
-                            <li><strong>borderRadius</strong>: Hint border radius in pixels (e.g: 2)</li>
-                            <li><strong>backgroundColor</strong>: Hint background color hex code (e.g: #f6e78e)</li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+    <ul>
+        <li><strong>duration</strong>: Animation duration for the transition between steps in ms (e.g: 1000)</li>
+        <li>
+            <strong>styles</strong>
+            <ul>
+                <li>
+                    <strong>frame</strong>
+                    <ul>
+                        <li><strong>customClass</strong>: Custom css class name</li>
+                        <li><strong>borderWidth</strong>: Frame border width in pixels (e.g: 2)</li>
+                        <li><strong>borderColor</strong>: Frame border color hex code (e.g: #f6e78e)</li>
+                    </ul>
+                </li>
+                <li>
+                    <strong>hint</strong>
+                    <ul>
+                        <li><strong>customClass</strong>: Custom css class name</li>
+                        <li><strong>borderWidth</strong>: Hint border width in pixels (e.g: 2)</li>
+                        <li><strong>borderColor</strong>: Hint border color hex code (e.g: #f6e78e)</li>
+                        <li><strong>borderRadius</strong>: Hint border radius in pixels (e.g: 2)</li>
+                        <li><strong>backgroundColor</strong>: Hint background color hex code (e.g: #f6e78e)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
 
-        <h2 id="changelog">Changelog</h2>
+    <h2 id="changelog">Changelog</h2>
 
-        <pre>
+    <pre>
                 <code class="nohighlight">
+2017-11-23
+-- Version 1.0.0-rc1 --
+* Add support for all Javascript events
+* Add support for multiple events triggering the next step
+* Add support for custom classes in options
+* Improve animation fluidity on window resize
+
 2017-11-22
 -- Version 1.0.0-beta2 --
 * Add window resize handling
@@ -343,34 +342,32 @@ var options = {
                 </code>
             </pre>
 
-        <h2>TODO</h2>
+    <h2>TODO</h2>
 
-        <pre>
+    <pre>
                 <code class="nohighlight">
-* Fix change event on inputs and select (mobile)
-* Add support for other events
+* Check definitive browser compatibility
+* Check compatibility with existing main frameworks
 
 ---- PRODUCTION READY ----
 
-* Add support for custom css classes in options
 * Add support for named steps and non linear user flows
 * Add support full html steps definition
 * Add analytics support
 * Add support for other languages
-* Improve animation fluidity on window resize
                 </code>
             </pre>
 
-        <h2 id="contact-author">Contact the author</h2>
+    <h2 id="contact-author">Contact the author</h2>
 
-        <p>
-            You can can contact me at <a href="mailto:pj.mazenot@gmail.com">pj.mazenot@gmail.com</a> for any question, suggestion, inquiry.<br/>
-            Support is available in english or french.
-        </p>
+    <p>
+        You can can contact me at <a href="mailto:pj.mazenot@gmail.com">pj.mazenot@gmail.com</a> for any question, suggestion, inquiry.<br/>
+        Support is available in english or french.
+    </p>
 
-        <p>
-            Also if you are using my project in a production website I'd very much like to hear about it :)
-        </p>
+    <p>
+        Also if you are using my project in a production website I'd very much like to hear about it :)
+    </p>
 
 </div>
 
@@ -378,7 +375,7 @@ var options = {
 
 </footer>
 
-<script type="text/javascript" src="build/stepsjs-1.0.0-rc1.js"></script>
+<script type="text/javascript" src="build/stepsjs-1.0.0-beta2.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
@@ -394,13 +391,13 @@ var options = {
             elementId: 'step2',
             title: 'Step 2: Enter the quantity',
             description: 'Enter a quantity to go to the next step',
-            triggerNext: 'change'
+            triggerNext: ['change', 'keydown']
         },
         {
             elementId: 'step3',
             title: 'Step 3: Add the product to the cart',
             description: 'Click on the "Add to cart" button to finish the demo',
-            triggerNext: 'click'
+            triggerNext: ['click', 'touchstart']
         }
     ];
 
@@ -409,10 +406,12 @@ var options = {
         interval: 5,
         styles: {
             frame: {
+                customClass: 'demo-frame',
                 borderWidth: 3,
                 borderColor: '#ff0000'
             },
             hint: {
+                customClass: 'demo-hint',
                 borderWidth: 1,
                 borderColor: '#00ff00',
                 borderRadius: 5,
@@ -422,7 +421,7 @@ var options = {
     };
 
     function run_demo() {
-        var test = new StepsJs(steps);
+        var test = new StepsJs(steps, options);
     }
 
 </script>
