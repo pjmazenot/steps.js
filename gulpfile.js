@@ -9,7 +9,7 @@ let uglify = require('gulp-uglify-es').default;
 let gutil = require('gulp-util');
 
 // steps.js version
-let stepsjsVersion = '1.0.0-beta2';
+let stepsjsVersion = '1.0.0-rc1';
 
 /* ######################### SCRIPTS ######################### */
 
