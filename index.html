@@ -104,11 +104,12 @@
     <p>
         Vanilla Javascript, No jQuery, Light, Easy to use, Guide the user on your website, form, etc.<br/>
         Tested on
+    </p>
     <ul>
-        <li>Google Chrome (Version 60.0.3112.90 (Build officiel) (32 bits))</li>
+        <li>Google Chrome (Version 60.0.3112.90 (Official Build) (32 bits))</li>
+        <li>Google Chrome (Version 61.0.3163.100 (Official Build) (64-bit))</li>
         <li>Mozilla Firefox(46.0.1)</li>
     </ul>
-    </p>
 
     <h2 id="demo">
         Demo
@@ -141,18 +142,29 @@
     <h2 id="getting-started">Getting Started</h2>
 
     <p>
-        To include the steps.js library add the following line to the <head> tag of your page :
+        First, you need to download the
+        <a href="https://raw.githubusercontent.com/pjmazenot/steps.js/v1.0.0-rc1/build/stepsjs-1.0.0-rc1.js" target="_blank">latest version of steps.js</a>
+        (<a href="https://raw.githubusercontent.com/pjmazenot/steps.js/v1.0.0-rc1/build/stepsjs-1.0.0-rc1.min.js" target="_blank">minified</a>)
+        and place it in your Javascript assets/libs folder (e.g: /assets/js/stepsjs-1.0.0-rc1.min.js).
+    </p>
+    <p>
+        Then include the steps.js library in your page add the following line to the <head> tag:
     </p>
 
     <pre>
-                <code class="xml">
-&lt;script type="application/javascript" src="build/stepsjs-1.0.0-beta2.min.js"&gt;&lt;/script&gt;
-                </code>
-            </pre>
+        <code class="xml">
+&lt;script type="application/javascript" src="/assets/js/stepsjs-1.0.0-rc1.min.js"&gt;&lt;/script&gt;
+        </code>
+    </pre>
+
+    <p>
+        Be sure to replace the file name by the correct one if you are using a non-minified or
+        <a href="https://github.com/pjmazenot/steps.js/tree/v1.0.0-rc1/build" target="_blank">an older version of steps.js</a>.
+    </p>
 
     <h2 id="usage">Usage</h2>
 
-    <h3>1. Define steps</h3>
+    <h3>1. Define the steps</h3>
 
     <p>
         The first part of the implementation is to define the user flow. In order to do that we define a variable
@@ -375,7 +387,7 @@ var options = {
 
 </footer>
 
-<script type="text/javascript" src="build/stepsjs-1.0.0-beta2.js"></script>
+<script type="text/javascript" src="build/stepsjs-1.0.0-rc1.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
