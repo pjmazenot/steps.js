@@ -1,6 +1,6 @@
 # steps.js
 
-*steps.js is an open source vanilla Javascript library allowing you to create user flow and guide your visitor to performs series of actions on your website.*
+*steps.js is an open source vanilla Javascript library allowing you to create user flows and guide your visitor to perform series of actions on your website.*
 
 > **Note**: this library is still in development. A few elements are currently being developed in order to achieve a production ready version ([See TODO](#todo)). Keep updated of the new releases!
 
@@ -27,6 +27,13 @@ A complete documentation is also available here:
 
 ```
 
+2017-11-23
+-- Version 1.0.0-rc1 --
+* Add support for all Javascript events
+* Add support for multiple events triggering the next step
+* Add support for custom classes in options
+* Improve animation fluidity on window resize
+
 2017-11-22
 -- Version 1.0.0-beta2 --
 * Add window resize handling
@@ -52,18 +59,30 @@ A complete documentation is also available here:
 
 ```
 
-* Fix change event on inputs and select (mobile)
-* Add support for other events
+* Check definitive browser compatibility
+* Check compatibility with existing main frameworks
 
 ---- PRODUCTION READY ----
 
-* Add support for custom classes in options
 * Add support for named steps and non linear user flows
 * Add support full html steps definition
 * Add analytics support
 * Add support for other languages
-* Improve animation fluidity on window resize
 
+```
+
+## Developers
+
+To setup the project clone this repo and run the command:
+
+```
+npm install
+```
+
+After modifying any file in the `src/` directory run the following command to build the script file:
+
+```
+gulp build:scripts
 ```
 
 ## Contribute

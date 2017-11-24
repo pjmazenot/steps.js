@@ -2,7 +2,7 @@ class StepsJs {
 
     constructor(steps, options = {}) {
 
-        console.log('-- init assistant --');
+        console.log('-- init steps.js --');
 
         this.currentScroll = StepsJsTools.getScrollTop();
         this.steps = steps;
@@ -10,10 +10,12 @@ class StepsJs {
             duration: 300,
             styles: {
                 frame: {
+                    customClass: '',
                     borderWidth: 3,
                     borderColor: '#ff0000'
                 },
                 hint: {
+                    customClass: '',
                     borderWidth: 1,
                     borderColor: '#00ff00',
                     borderRadius: 5,
@@ -32,19 +34,24 @@ class StepsJs {
         // Declare listeners
         let self = this;
         window.onresize = function(event) {
-            if(!this.isResizing) {
-                self.isResizing = true;
-                setTimeout(function () {
+
+            self.isResizing = true;
+
+            setTimeout(function () {
+                self.isResizing = false;
+            }, 100);
+
+            setTimeout(function () {
+                if(!self.isResizing) {
                     self.moveFrame();
                     self.displayHint();
-                    self.isResizing = false;
-                }, 500);
-            }
+                }
+            }, 150);
+
         };
+
         window.onscroll = function() {
 
-            // Fixed scrollTop not handled by chrome or FF
-            // @link: https://stackoverflow.com/questions/28633221/document-body-scrolltop-firefox-returns-0-only-js
             self.currentScroll = StepsJsTools.getScrollTop();
 
         };
@@ -55,7 +62,7 @@ class StepsJs {
 
     run() {
 
-        console.log('-- run assistant --');
+        console.log('-- run --');
 
         // Init step process
         this.currentStepIndex = 0;
@@ -91,7 +98,7 @@ class StepsJs {
 
         this.moveFrame();
         this.displayHint();
-        this.addStepTrigger(direction);
+        this.addStepTriggers(direction);
 
     }
 
@@ -102,6 +109,9 @@ class StepsJs {
 
             this.frame = document.createElement('div');
             this.frame.setAttribute('id', 'jsa-frame');
+            if(this.options.styles.frame.customClass != '') {
+                this.frame.setAttribute('class', this.options.styles.frame.customClass);
+            }
             this.frame.setAttribute('style', 'pointer-events:none;');
             this.frame.style.position = 'absolute';
             this.frame.style.boxSizing = 'border-box';
@@ -136,14 +146,15 @@ class StepsJs {
 
         // Position and resize the frame to match the target element
         let loop = 0;
-        let moveInterval = setInterval(
+        clearInterval(this.moveInterval);
+        this.moveInterval = setInterval(
             (function(self, loop) {
 
                 return function() {
 
                     if (++loop > self.options.duration / self.options.interval) {
 
-                        clearInterval(moveInterval);
+                        clearInterval(self.moveInterval);
 
                         if(self.currentStepIndex === 1) {
                             self.frame.style.opacity = '1';
@@ -187,6 +198,9 @@ class StepsJs {
             // Hint
             this.hint = document.createElement('div');
             this.hint.setAttribute('id', 'jsa-hint');
+            if(this.options.styles.hint.customClass != '') {
+                this.hint.setAttribute('class', this.options.styles.hint.customClass);
+            }
             this.hint.style.position = 'absolute';
             this.hint.style.padding = '10px';
             this.hint.style.boxSizing = 'border-box';
@@ -216,23 +230,44 @@ class StepsJs {
 
     }
 
-    addStepTrigger(direction) {
+    addStepTriggers(direction) {
 
         let self = this;
 
+        // Force the array format for the list of next step triggers
+        if(!(this.currentStep.triggerNext instanceof Array)) {
+            this.currentStep.triggerNext = [this.currentStep.triggerNext];
+        }
+
+        // Define the callback called when the user perform the action triggering the next step
         function callback(e) {
+
+            e.stopPropagation();
+
             let targetElement = e.target || e.srcElement;
-            targetElement.removeEventListener(self.currentStep.triggerNext, callback);
+
+            // Remove all events
+            for(let i = 0 ; i < self.currentStep.triggerNext.length ; i++) {
+
+                let eventName = self.currentStep.triggerNext[i];
+                targetElement.removeEventListener(eventName, callback);
+
+            }
+
             self.processStep(direction);
+
         }
 
         if(direction === 'prev') {
 
         } else {
 
-            // Add listener
-            if(this.currentStep.triggerNext === 'click' || this.currentStep.triggerNext === 'change') {
-                this.targetElem.addEventListener(this.currentStep.triggerNext, callback);
+            // Add listeners for next step
+            for(let i = 0 ; i < this.currentStep.triggerNext.length ; i++) {
+
+                let eventName = this.currentStep.triggerNext[i];
+                this.targetElem.addEventListener(eventName, callback);
+
             }
 
         }
