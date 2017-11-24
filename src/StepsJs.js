@@ -32,19 +32,24 @@ class StepsJs {
         // Declare listeners
         let self = this;
         window.onresize = function(event) {
-            if(!this.isResizing) {
-                self.isResizing = true;
-                setTimeout(function () {
+
+            self.isResizing = true;
+
+            setTimeout(function () {
+                self.isResizing = false;
+            }, 100);
+
+            setTimeout(function () {
+                if(!self.isResizing) {
                     self.moveFrame();
                     self.displayHint();
-                    self.isResizing = false;
-                }, 500);
-            }
+                }
+            }, 150);
+
         };
+
         window.onscroll = function() {
 
-            // Fixed scrollTop not handled by chrome or FF
-            // @link: https://stackoverflow.com/questions/28633221/document-body-scrolltop-firefox-returns-0-only-js
             self.currentScroll = StepsJsTools.getScrollTop();
 
         };
@@ -136,14 +141,15 @@ class StepsJs {
 
         // Position and resize the frame to match the target element
         let loop = 0;
-        let moveInterval = setInterval(
+        clearInterval(this.moveInterval);
+        this.moveInterval = setInterval(
             (function(self, loop) {
 
                 return function() {
 
                     if (++loop > self.options.duration / self.options.interval) {
 
-                        clearInterval(moveInterval);
+                        clearInterval(self.moveInterval);
 
                         if(self.currentStepIndex === 1) {
                             self.frame.style.opacity = '1';
