@@ -2,7 +2,7 @@ class StepsJs {
 
     constructor(steps, options = {}) {
 
-        console.log('-- init assistant --');
+        console.log('-- init steps.js --');
 
         this.currentScroll = StepsJsTools.getScrollTop();
         this.steps = steps;
@@ -55,7 +55,7 @@ class StepsJs {
 
     run() {
 
-        console.log('-- run assistant --');
+        console.log('-- run --');
 
         // Init step process
         this.currentStepIndex = 0;
@@ -91,7 +91,7 @@ class StepsJs {
 
         this.moveFrame();
         this.displayHint();
-        this.addStepTrigger(direction);
+        this.addStepTriggers(direction);
 
     }
 
@@ -216,23 +216,44 @@ class StepsJs {
 
     }
 
-    addStepTrigger(direction) {
+    addStepTriggers(direction) {
 
         let self = this;
 
+        // Force the array format for the list of next step triggers
+        if(!(this.currentStep.triggerNext instanceof Array)) {
+            this.currentStep.triggerNext = [this.currentStep.triggerNext];
+        }
+
+        // Define the callback called when the user perform the action triggering the next step
         function callback(e) {
+
+            e.stopPropagation();
+
             let targetElement = e.target || e.srcElement;
-            targetElement.removeEventListener(self.currentStep.triggerNext, callback);
+
+            // Remove all events
+            for(let i = 0 ; i < self.currentStep.triggerNext.length ; i++) {
+
+                let eventName = self.currentStep.triggerNext[i];
+                targetElement.removeEventListener(eventName, callback);
+
+            }
+
             self.processStep(direction);
+
         }
 
         if(direction === 'prev') {
 
         } else {
 
-            // Add listener
-            if(this.currentStep.triggerNext === 'click' || this.currentStep.triggerNext === 'change') {
-                this.targetElem.addEventListener(this.currentStep.triggerNext, callback);
+            // Add listeners for next step
+            for(let i = 0 ; i < this.currentStep.triggerNext.length ; i++) {
+
+                let eventName = this.currentStep.triggerNext[i];
+                this.targetElem.addEventListener(eventName, callback);
+
             }
 
         }
