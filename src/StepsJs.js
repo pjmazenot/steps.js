@@ -10,10 +10,12 @@ class StepsJs {
             duration: 300,
             styles: {
                 frame: {
+                    customClass: '',
                     borderWidth: 3,
                     borderColor: '#ff0000'
                 },
                 hint: {
+                    customClass: '',
                     borderWidth: 1,
                     borderColor: '#00ff00',
                     borderRadius: 5,
@@ -107,6 +109,9 @@ class StepsJs {
 
             this.frame = document.createElement('div');
             this.frame.setAttribute('id', 'jsa-frame');
+            if(this.options.styles.frame.customClass != '') {
+                this.frame.setAttribute('class', this.options.styles.frame.customClass);
+            }
             this.frame.setAttribute('style', 'pointer-events:none;');
             this.frame.style.position = 'absolute';
             this.frame.style.boxSizing = 'border-box';
@@ -193,6 +198,9 @@ class StepsJs {
             // Hint
             this.hint = document.createElement('div');
             this.hint.setAttribute('id', 'jsa-hint');
+            if(this.options.styles.hint.customClass != '') {
+                this.hint.setAttribute('class', this.options.styles.hint.customClass);
+            }
             this.hint.style.position = 'absolute';
             this.hint.style.padding = '10px';
             this.hint.style.boxSizing = 'border-box';
