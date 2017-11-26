@@ -7,9 +7,10 @@ let concat = require('gulp-concat');
 let stripDebug = require('gulp-strip-debug');
 let uglify = require('gulp-uglify-es').default;
 let gutil = require('gulp-util');
+let babel = require('gulp-babel');
 
 // steps.js version
-let stepsjsVersion = '1.0.0-rc1';
+let stepsjsVersion = '1.0.0';
 
 /* ######################### SCRIPTS ######################### */
 
@@ -19,6 +20,10 @@ gulp.task('build:scripts', function () {
         .pipe(concat('stepsjs-' + stepsjsVersion + '.js'))
         .pipe(gulp.dest('build'))
         .pipe(stripDebug())
+        .pipe(babel({
+            plugins: ['@babel/plugin-transform-object-assign'],
+            presets: ['es2015']
+        }))
         .pipe(uglify())
         .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
         .pipe(rename({suffix: '.min'}))
