@@ -2,7 +2,7 @@
 
 *steps.js is an open source vanilla Javascript library allowing you to create user flows and guide your visitor to perform series of actions on your website.*
 
-> **Note**: this library is still in development. A few elements are currently being developed in order to achieve a production ready version ([See TODO](#todo)). Keep updated of the new releases!
+> **Note**: this library is now production ready! A few evolutions are already planned ([See TODO](#todo)) but don't hesitate to also send me your suggestions. And keep updated of the new releases!
 
 ## Table of Contents
 
@@ -10,6 +10,8 @@
   1. [Documentation](#documentation)
   1. [Changelog](#changelog)
   1. [TODO](#todo)
+  1. [Developers](#developers)
+  1. [Contribute](#contribute)
 
 ## Demo 
 
@@ -26,6 +28,12 @@ A complete documentation is also available here:
 ## Changelog
 
 ```
+
+2017-11-26 - PRODUCTION READY
+-- Version 1.0.0 --
+* Add babel to gulp script for backward compatibility
+* Make hint title bold by default
+* Clean repo and update docs
 
 2017-11-23
 -- Version 1.0.0-rc1 --
@@ -59,11 +67,7 @@ A complete documentation is also available here:
 
 ```
 
-* Check definitive browser compatibility
-* Check compatibility with existing main frameworks
-
----- PRODUCTION READY ----
-
+* Automated unit testing
 * Add support for named steps and non linear user flows
 * Add support full html steps definition
 * Add analytics support

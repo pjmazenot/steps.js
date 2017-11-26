@@ -106,13 +106,18 @@
     </h1>
 
     <p>
-        Vanilla Javascript, No jQuery, Light, Easy to use, Guide the user on your website, form, etc.<br/>
-        Tested on
+        Steps.js allows you to guide the user on your website. It's light (5.16kb minified) and easy to use use. Also only
+        vanilla Javascript so no jQuery.<br/>
+        <br/>
+        It has been tested using Browserstack for:
     </p>
     <ul>
-        <li>Google Chrome (Version 60.0.3112.90 (Official Build) (32 bits))</li>
-        <li>Google Chrome (Version 61.0.3163.100 (Official Build) (64-bit))</li>
-        <li>Mozilla Firefox(46.0.1)</li>
+        <li>Google Chrome (All versions)</li>
+        <li>Mozilla Firefox (4+)</li>
+        <li>Safari (5+)</li>
+        <li>Opera (15+)</li>
+        <li>Microsoft Edge (14+)</li>
+        <li>Internet Explorer (9+)</li>
     </ul>
 
     <h2 id="demo">
@@ -120,7 +125,7 @@
     </h2>
 
     <p>
-        This demo simulate a user flow where you want to guide the user from the product selection to the "Add to cart" action.
+        This demo simulates a user flow where you want to guide the user from the product selection to the "Add to cart" action.
     </p>
 
     <p>
@@ -152,7 +157,7 @@
         and place it in your Javascript assets/libs folder (e.g: /assets/js/stepsjs-1.0.0.min.js).
     </p>
     <p>
-        Then include the steps.js library in your page add the following line to the <head> tag:
+        Then include the steps.js library in your page by adding the following line to the &lt;head&gt; tag:
     </p>
 
     <pre>
@@ -162,8 +167,8 @@
     </pre>
 
     <p>
-        Be sure to replace the file name by the correct one if you are using a non-minified or
-        <a href="https://github.com/pjmazenot/steps.js/tree/v1.0.0/build" target="_blank">an older version of steps.js</a>.
+        Be sure to replace the file name with the correct one if you are using a non-minified or
+        <a href="https://github.com/pjmazenot/steps.js/releases" target="_blank">an older version of steps.js</a>.
     </p>
 
     <h2 id="usage">Usage</h2>
@@ -172,15 +177,27 @@
 
     <p>
         The first part of the implementation is to define the user flow. In order to do that we define a variable
-        containing an array filled with the differents steps of the flow. Each step is an object containing the
+        containing an array filled with the different steps of the flow. Each step is an object containing the
         following attributes :
     </p>
 
     <ul>
-        <li><strong>elementId</strong>: ID of the element</li>
-        <li><strong>title</strong>: Title for the hint</li>
-        <li><strong>description</strong>: Description for the hint</li>
-        <li><strong>triggerNext</strong>: Event on the element that is going to trigger the next step (supported events: <em>click</em>, <em>change</em>)</li>
+        <li>
+            <strong>elementId (string)</strong>
+            ID of the element
+        </li>
+        <li>
+            <strong>title (string)</strong>
+            Title for the hint
+        </li>
+        <li>
+            <strong>description (string)</strong>
+            Description for the hint
+        </li>
+        <li>
+            <strong>triggerNext (string|Array)</strong>
+            Event(s) on the element that is going to trigger the next step (e.g: <em>click</em>, <em>change</em>, etc.)
+        </li>
     </ul>
 
     <p>
@@ -203,10 +220,10 @@ var steps = [
         triggerNext: ['change', 'keydown']
     },
     {
-        elementId: 'test3',
+        elementId: 'step3',
         title: 'Step 3',
-        description: 'You need to click on that button to finish the flow',
-        triggerNext: ['click', 'touchstart']
+        description: 'You need to click on this button to finish the flow',
+        triggerNext: ['click']
     }
 ];
                 </code>
@@ -215,7 +232,7 @@ var steps = [
     <h3>2. Run steps.js</h3>
 
     <p>
-        There is different way to run steps.js.
+        There are different ways to run steps.js.
     </p>
 
     <h4>Default</h4>
@@ -226,7 +243,7 @@ var steps = [
 
     <pre>
                 <code class="javascript">
-// Run defaults
+// Run with defaults
 new StepsJs(steps);
                 </code>
             </pre>
@@ -234,7 +251,7 @@ new StepsJs(steps);
     <h4>Customize options</h4>
 
     <p>
-        If you'd like to personalized your instance of steps.js you can pass an object containing override properties for the
+        If you'd like to personalize your instance of steps.js, you can pass an object containing override properties for the
         <a href="#options">available options</a>. This will also automatically start the user flow.
     </p>
 
@@ -265,12 +282,12 @@ demo.processStep('next');
     <h3 id="options">3. Customize Options</h3>
 
     <p>
-        steps.js allows you to customize various parameters of the StepsSj instance. They are all passed as properties of the
+        steps.js allows you to customize various parameters of the StepsJs instance. They are all passed as properties of the
         <em>options</em> variable.
     </p>
 
     <p>
-        Here is a full example of a customize set of options:
+        Here is a full example of a customized set of options:
     </p>
 
     <pre>
@@ -279,12 +296,12 @@ var options = {
     duration: 200,
     styles: {
         frame: {
-        	customClass: 'custom-frame',
+            customClass: 'custom-frame',
             borderWidth: 3,
             borderColor: '#ff0000'
         },
         hint: {
-        	customClass: 'custom-hint',
+            customClass: 'custom-hint',
             borderWidth: 1,
             borderColor: '#00ff00',
             borderRadius: 5,
@@ -330,6 +347,12 @@ var options = {
 
     <pre>
                 <code class="nohighlight">
+2017-11-26 - PRODUCTION READY
+-- Version 1.0.0 --
+* Add babel to gulp script for backward compatibility
+* Make hint title bold by default
+* Clean repo and update docs
+
 2017-11-23
 -- Version 1.0.0-rc1 --
 * Add support for all Javascript events
@@ -362,12 +385,8 @@ var options = {
 
     <pre>
                 <code class="nohighlight">
-* Check definitive browser compatibility
-* Check compatibility with existing main frameworks
-
----- PRODUCTION READY ----
-
-* Add support for named steps and non linear user flows
+* Automated unit testing
+* Add support for named steps and non-linear user flows
 * Add support full html steps definition
 * Add analytics support
 * Add support for other languages
@@ -377,12 +396,13 @@ var options = {
     <h2 id="contact-author">Contact the author</h2>
 
     <p>
-        You can can contact me at <a href="mailto:pj.mazenot@gmail.com">pj.mazenot@gmail.com</a> for any question, suggestion, inquiry.<br/>
+        You can can contact me at <a href="mailto:pj.mazenot@gmail.com">pj.mazenot@gmail.com</a> for any questions,
+        suggestions, inquiries.<br/>
         Support is available in english or french.
     </p>
 
     <p>
-        Also if you are using my project in a production website I'd very much like to hear about it :)
+        Also if you are using my project on a production website I'd very much like to hear about it :)
     </p>
 
 </div>
