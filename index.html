@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
     <style>
         html, body {padding: 0;margin: 0;font-family: 'Open Sans', sans-serif;background: #fbf7fd;}
+        header, footer, nav {display: block;}
         h1, h2, h3 {color: #310044;font-weight: normal;}
         h1 {font-size: 3em;}
         h1 .subtitle {color: #967f9e;font-size: .6em;}
@@ -53,11 +54,11 @@
             100% {-moz-box-shadow: 0 0 0 0 rgba(49,0,68, 0);box-shadow: 0 0 0 0 rgba(49,0,68, 0);}
         }
 
-        @media all and (min-width: 1000px) {
+        @media all and (min-width: 1100px) {
             .hide-desktop {display: none !important;}
         }
 
-        @media all and (max-width: 1000px) {
+        @media all and (max-width: 1100px) {
             h1 {font-size: 30px; line-height: 24px;}
             h1 .subtitle {font-size: 17px;}
             .hide-mobile {display: none !important;}
@@ -68,6 +69,9 @@
         }
     </style>
 
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 </head>
 <body>
 
@@ -386,8 +390,7 @@ var options = {
 <footer>
 
 </footer>
-
-<script type="text/javascript" src="build/stepsjs-1.0.0.js"></script>
+<script type="text/javascript" src="build/stepsjs-1.0.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 <script>
