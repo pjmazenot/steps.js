@@ -21,6 +21,7 @@ gulp.task('build:scripts', function () {
         .pipe(gulp.dest('build'))
         .pipe(stripDebug())
         .pipe(babel({
+            plugins: ['@babel/plugin-transform-object-assign'],
             presets: ['es2015']
         }))
         .pipe(uglify())

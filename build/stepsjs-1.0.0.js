@@ -190,6 +190,7 @@ class StepsJs {
             // Hint title
             let hintTitle = document.createElement('div');
             hintTitle.setAttribute('id', 'jsa-hint-title');
+            hintTitle.style.fontWeight = 'bold';
 
             // Hint description
             let hintDescription = document.createElement('div');
