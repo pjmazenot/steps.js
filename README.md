@@ -72,6 +72,8 @@ A complete documentation is also available here:
 * Add support full html steps definition
 * Add analytics support
 * Add support for other languages
+* Add the possibility to define trigger callbacks
+* Add option to personalize the hint position
 
 ```
 
