@@ -17,7 +17,7 @@
 
 To see a working example of how steps.js can help you guide your visitors click on the following link:
 
-[Demo](https://stepsjs.com "")
+[Demo](https://pjmazenot.github.io/steps.js/ "")
 
 ## Documentation
 
